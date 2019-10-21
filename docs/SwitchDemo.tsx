@@ -49,8 +49,6 @@ export default function SwitchDemo() {
         onChange={(event) => handleChange(event, 'switch6')}
         color="warning"
       />
-      <Switch checked value="switch7" disabled />
-      <Switch value="switch8" disabled />
     </>
   );
 }

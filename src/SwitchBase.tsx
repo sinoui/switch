@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import classNames from 'classnames';
 import { useRipple } from '@sinoui/ripple';
 import { getColorFromTheme } from 'sinoui-components/utils/colors';
+import Color from 'color';
+import { Theme } from 'sinoui-components/styles';
 
 export interface Props {
   inputClassName?: string;
@@ -28,7 +30,23 @@ interface WrapperProps {
   checked?: boolean;
   disabled?: boolean;
   color?: string;
+  theme: Theme;
 }
+
+function getColor(props: WrapperProps) {
+  return getColorFromTheme(props, props.theme.typography.button.color);
+}
+
+export const getHoverBgColor = (props: WrapperProps) => {
+  const mainColor = getColor(props);
+  if (mainColor && mainColor !== 'inherit' && mainColor !== 'currentColor') {
+    return Color(mainColor)
+      .alpha(0.12)
+      .rgb()
+      .string();
+  }
+  return null;
+};
 
 const checkedWrapperStyle = css<WrapperProps>`
   transform: translateX(50%);
@@ -38,6 +56,15 @@ const checkedWrapperStyle = css<WrapperProps>`
       theme: props.theme,
       disabled: props.disabled,
     })};
+
+  &:hover {
+    background-color: ${(props) =>
+      getHoverBgColor({
+        color: props.color || 'primary',
+        theme: props.theme,
+        disabled: props.disabled,
+      })};
+  }
 
   & + .sinoui-switch-track {
     background-color: ${(props) =>
@@ -53,6 +80,10 @@ const checkedWrapperStyle = css<WrapperProps>`
 const disabledWrapperStyle = css<WrapperProps>`
   color: ${(props) =>
     props.theme.palette.type === 'light' ? '#bdbdbd' : '#424242'};
+
+  &:hover {
+    background-color: transparent;
+  }
 
   & + .sinoui-switch-track {
     opacity: ${(props) => (props.checked ? 0.5 : 0.12)};
@@ -71,6 +102,12 @@ const SwitchBaseWrapper = styled.span<WrapperProps>`
       duration: props.theme.transitions.duration.shortest,
     })};
   padding: 9px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
   ${(props) => props.checked && checkedWrapperStyle};
   ${(props) => props.disabled && disabledWrapperStyle};
 
@@ -102,6 +139,11 @@ const SwitchBaseWrapper = styled.span<WrapperProps>`
     border-radius: 50%;
     background-color: currentColor;
   }
+
+  & .sinoui-switch-base__ripple {
+    width: 38px;
+    height: 38px;
+  }
 `;
 
 export default function SwitchBase(props: Props) {
@@ -116,7 +158,12 @@ export default function SwitchBase(props: Props) {
     inputProps,
     inputRef,
   } = props;
-  const rippleRef = useRipple();
+  const rippleRef = useRipple({
+    center: true,
+    fixSize: true,
+    rippleClassName: 'sinoui-switch-base__ripple',
+    rippleLayoutClassName: 'sinoui-switch-base__riple-layout',
+  });
   return (
     <SwitchBaseWrapper
       ref={rippleRef}

@@ -12,7 +12,7 @@ interface SwitchProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Wrapper = styled.span`
+const Wrapper = styled.span<{ disabled?: boolean }>`
   width: 58px;
   height: 38px;
   display: inline-flex;
@@ -23,12 +23,13 @@ const Wrapper = styled.span`
   box-sizing: border-box;
   flex-shrink: 0;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `;
 
 export default function Switch(props: SwitchProps) {
+  const { disabled } = props;
   return (
-    <Wrapper className={classNames('sinoui-switch')}>
+    <Wrapper className={classNames('sinoui-switch')} disabled={disabled}>
       <SwitchBase {...props} />
       <SwitchTrack className="sinoui-switch-track" />
     </Wrapper>

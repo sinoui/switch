@@ -3,10 +3,139 @@ name: 开始
 route: /
 ---
 
-import SwitchDemo from './SwitchDemo';
-
 import { Playground } from 'docz';
+import Demo from './Demo';
+import SwitchDemo from './SwitchDemo';
+import Switch from '../src/Switch';
+
+开关控件,此组件为受控组件。
+
+## 依赖安装
+
+```shell
+yarn add @sinoui/switch
+```
+
+## 入门示例
+
+```tsx
+import Switch from '@sinoui/switch';
+
+function Demo() {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = useCallback((event) => {
+    setChecked(event.target.checked);
+  }, []);
+
+  return <Switch checked={checked} value="switch1" onChange={handleChange} />;
+}
+```
+
+<Playground>
+  <Demo />
+</Playground>
+
+## 颜色切换
+
+`Switch`组件颜色规范不仅支持`Material Designer`的`primary`和`accent`,
+又支持`Bootstrap`的`success`、`error`、`warning`、`info`、`danger`。
+使用时可直接给 Switch 组件指定相应的`color`属性即可。除了上述提到的色系之外，Switch 的`color`属性可以是任意颜色值,组件在`checked`状态下会应用指定的色值。
+
+`SwitchDemo.tsx`
+
+```tsx
+import React, { useState, useCallback } from 'react';
+import Switch from '@sinoui/switch';
+
+export default function SwitchDemo() {
+  const [checked, setChecked] = useState<{ [name: string]: boolean }>({
+    switch3: true,
+  });
+  const handleChange = useCallback(
+    (event, name) => {
+      const newChecked = { ...checked, [name]: event.target.checked };
+      setChecked(newChecked);
+    },
+    [checked],
+  );
+  return (
+    <>
+      <Switch
+        checked={checked.switch1}
+        value="switch1"
+        onChange={(event) => handleChange(event, 'switch1')}
+      />
+      <Switch
+        checked={checked.switch2}
+        value="switch2"
+        onChange={(event) => handleChange(event, 'switch2')}
+        color="accent"
+      />
+      <Switch
+        checked={checked.switch3}
+        value="switch3"
+        onChange={(event) => handleChange(event, 'switch3')}
+        color="success"
+      />
+      <Switch
+        checked={checked.switch4}
+        value="switch4"
+        onChange={(event) => handleChange(event, 'switch4')}
+        color="error"
+      />
+      <Switch
+        checked={checked.switch5}
+        value="switch5"
+        onChange={(event) => handleChange(event, 'switch5')}
+        color="info"
+      />
+      <Switch
+        checked={checked.switch6}
+        value="switch6"
+        onChange={(event) => handleChange(event, 'switch6')}
+        color="warning"
+      />
+  );
+}
+```
 
 <Playground>
   <SwitchDemo />
 </Playground>
+
+## 不可用状态
+
+<Playground>
+  <Switch disabled value="switch1" />
+  <Switch disabled checked value="switch2" />
+</Playground>
+
+## 自定义样式
+
+`Switch`组件的样式规范是参照[material designe | Switches](https://material.io/components/selection-controls/#switches)实现。
+
+`DOM结构`
+
+```html
+<span class="sinoui-switch">
+  <span class="sinoui-switch-base">
+    <span class="sinoui-switch-label">
+      <input class="sinoui-switch-input" />
+      <span class="sinoui-switch-thumb" />
+    </span>
+  </span>
+  <span class="sinoui-switch-track" />
+</span>
+```
+
+如果我们需要自定义样式，不如改变圆点的尺寸，可以使用定义 css 文件指定其对应颜色，然后将 css 文件引入到使用 Switch 组件的文件中即可：
+
+`Switch.css`
+
+```css
+.sinoui-switch-thumb {
+  height: 16px;
+  width: 16px;
+}
+```
