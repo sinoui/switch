@@ -76,7 +76,10 @@ const disabledWrapperStyle = css<WrapperProps>`
   }
 `;
 
-const SwitchBaseWrapper = styled.span<WrapperProps>`
+const SwitchLabelWrapper = styled.span<WrapperProps>`
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
   position: absolute;
   top: 0;
   left: 0;
@@ -97,7 +100,7 @@ const SwitchBaseWrapper = styled.span<WrapperProps>`
   ${(props) => props.checked && checkedWrapperStyle};
   ${(props) => props.disabled && disabledWrapperStyle};
 
-  & .sinoui-switch-input {
+  & .sinoui-switch__input {
     top: 0;
     left: -100%;
     width: 300%;
@@ -110,14 +113,7 @@ const SwitchBaseWrapper = styled.span<WrapperProps>`
     position: absolute;
   }
 
-  & .sinoui-switch-label {
-    width: 100%;
-    display: flex;
-    align-items: inherit;
-    justify-content: inherit;
-  }
-
-  & .sinoui-switch-thumb {
+  & .sinoui-switch__thumb {
     width: 20px;
     height: 20px;
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
@@ -126,13 +122,20 @@ const SwitchBaseWrapper = styled.span<WrapperProps>`
     background-color: currentColor;
   }
 
-  & .sinoui-switch-base__ripple {
+  & .sinoui-switch__ripple {
     width: 38px;
     height: 38px;
   }
 `;
 
-export default function SwitchBase(props: Props) {
+/**
+ * 开关控件标签组件，主要包括小圆点
+ *
+ * @export
+ * @param {Props} props
+ * @returns
+ */
+export default function SwitchLabel(props: Props) {
   const {
     inputClassName,
     checked,
@@ -148,33 +151,31 @@ export default function SwitchBase(props: Props) {
   const rippleRef = useRipple<HTMLSpanElement>({
     center: true,
     fixSize: true,
-    rippleClassName: 'sinoui-switch-base__ripple',
-    rippleLayoutClassName: 'sinoui-switch-base__riple-layout',
+    rippleClassName: 'sinoui-switch__ripple',
+    rippleLayoutClassName: 'sinoui-switch__riple-layout',
     disabled,
   });
 
   return (
-    <SwitchBaseWrapper
+    <SwitchLabelWrapper
       ref={rippleRef}
       checked={checked}
       disabled={disabled}
       color={color}
-      className="sinoui-switch-base"
+      className="sinoui-switch__label"
     >
-      <span className={classNames('sinoui-switch-label')}>
-        <input
-          type="checkbox"
-          name={name}
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-          value={value}
-          ref={inputRef}
-          {...inputProps}
-          className={classNames('sinoui-switch-input', inputClassName)}
-        />
-        <span className="sinoui-switch-thumb" />
-      </span>
-    </SwitchBaseWrapper>
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        disabled={disabled}
+        value={value}
+        ref={inputRef}
+        {...inputProps}
+        className={classNames('sinoui-switch__input', inputClassName)}
+      />
+      <span className="sinoui-switch__thumb" />
+    </SwitchLabelWrapper>
   );
 }
