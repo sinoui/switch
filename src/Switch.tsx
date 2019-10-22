@@ -27,11 +27,22 @@ const Wrapper = styled.span<{ disabled?: boolean }>`
 `;
 
 export default function Switch(props: SwitchProps) {
-  const { disabled } = props;
+  const { disabled, checked, color } = props;
   return (
-    <Wrapper className={classNames('sinoui-switch')} disabled={disabled}>
+    <Wrapper
+      className={classNames('sinoui-switch', {
+        'sinoui-switch__disabled': disabled,
+        'sinoui-switch__checked': checked,
+      })}
+      disabled={disabled}
+    >
       <SwitchBase {...props} />
-      <SwitchTrack className="sinoui-switch-track" />
+      <SwitchTrack
+        className="sinoui-switch-track"
+        disabled={disabled}
+        checked={checked}
+        color={color}
+      />
     </Wrapper>
   );
 }

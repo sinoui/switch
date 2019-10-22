@@ -65,16 +65,6 @@ const checkedWrapperStyle = css<WrapperProps>`
         disabled: props.disabled,
       })};
   }
-
-  & + .sinoui-switch-track {
-    background-color: ${(props) =>
-      getColorFromTheme({
-        color: props.color || 'primary',
-        theme: props.theme,
-        disabled: props.disabled,
-      })};
-    opacity: 0.5;
-  }
 `;
 
 const disabledWrapperStyle = css<WrapperProps>`
@@ -83,10 +73,6 @@ const disabledWrapperStyle = css<WrapperProps>`
 
   &:hover {
     background-color: transparent;
-  }
-
-  & + .sinoui-switch-track {
-    opacity: ${(props) => (props.checked ? 0.5 : 0.12)};
   }
 `;
 
@@ -158,27 +144,26 @@ export default function SwitchBase(props: Props) {
     inputProps,
     inputRef,
   } = props;
-  const rippleRef = useRipple({
+
+  const rippleRef = useRipple<HTMLSpanElement>({
     center: true,
     fixSize: true,
     rippleClassName: 'sinoui-switch-base__ripple',
     rippleLayoutClassName: 'sinoui-switch-base__riple-layout',
+    disabled,
   });
+
   return (
     <SwitchBaseWrapper
       ref={rippleRef}
       checked={checked}
       disabled={disabled}
       color={color}
-      className={classNames('sinoui-switch-base', {
-        'sinoui-switch-base__checked': checked,
-        'sinoui-switch-base__disabled': disabled,
-      })}
+      className="sinoui-switch-base"
     >
       <span className={classNames('sinoui-switch-label')}>
         <input
           type="checkbox"
-          className={classNames('sinoui-switch-input', inputClassName)}
           name={name}
           checked={checked}
           onChange={onChange}
@@ -186,6 +171,7 @@ export default function SwitchBase(props: Props) {
           value={value}
           ref={inputRef}
           {...inputProps}
+          className={classNames('sinoui-switch-input', inputClassName)}
         />
         <span className="sinoui-switch-thumb" />
       </span>
