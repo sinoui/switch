@@ -13,9 +13,7 @@ export interface Props {
   name?: string;
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  inputRef?:
-    | React.RefObject<HTMLInputElement>
-    | ((dom: HTMLInputElement) => void);
+  inputRef?: React.Ref<HTMLInputElement>;
   /**
    * 给input元素应用上新的属性
    */
