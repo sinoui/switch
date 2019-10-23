@@ -124,6 +124,13 @@ const SwitchLabelWrapper = styled.span<WrapperProps>`
     width: 38px;
     height: 38px;
   }
+
+  & .sinoui-switch__ripple-layout {
+    left: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+  }
 `;
 
 /**
@@ -150,7 +157,7 @@ export default function SwitchLabel(props: Props) {
     center: true,
     fixSize: true,
     rippleClassName: 'sinoui-switch__ripple',
-    rippleLayoutClassName: 'sinoui-switch__riple-layout',
+    rippleLayoutClassName: 'sinoui-switch__ripple-layout',
     disabled,
   });
 

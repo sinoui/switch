@@ -10,7 +10,7 @@ import Switch from '../src/Switch';
 
 # @sinoui/switch
 
-开关控件,此组件为受控组件。
+开关控件，此组件为受控组件。
 
 [![npm version](https://img.shields.io/npm/v/@sinoui/switch)](https://www.npmjs.com/package/@sinoui/switch)
 [![downloads](https://img.shields.io/npm/dm/@sinoui/switch)](https://www.npmjs.com/package/@sinoui/switch)
@@ -43,9 +43,9 @@ function Demo() {
 
 ## 颜色切换
 
-`Switch`组件颜色规范不仅支持`Material Designer`的`primary`和`accent`,
+`Switch`组件颜色规范不仅支持`Material Designer`的`primary`和`accent`，
 又支持`Bootstrap`的`success`、`error`、`warning`、`info`、`danger`。
-使用时可直接给 Switch 组件指定相应的`color`属性即可。除了上述提到的色系之外，Switch 的`color`属性可以是任意颜色值,组件在`checked`状态下会应用指定的色值。
+使用时可直接给 Switch 组件指定相应的`color`属性即可。除了上述提到的色系之外，Switch 的`color`属性可以是任意颜色值，组件在`checked`状态下会应用指定的色值。
 
 `SwitchDemo.tsx`
 
@@ -57,13 +57,10 @@ export default function SwitchDemo() {
   const [checked, setChecked] = useState<{ [name: string]: boolean }>({
     switch3: true,
   });
-  const handleChange = useCallback(
-    (event, name) => {
-      const newChecked = { ...checked, [name]: event.target.checked };
-      setChecked(newChecked);
-    },
-    [checked],
-  );
+   const handleChange = useCallback((event, name) => {
+    const value = event.target.checked;
+    setChecked((state) => ({ ...state, [name]: value }));
+  }, []);
   return (
     <>
       <Switch

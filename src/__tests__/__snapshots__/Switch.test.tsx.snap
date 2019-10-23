@@ -73,6 +73,13 @@ exports[`Switch 镜像测试 不可用状态 1`] = `
   height: 38px;
 }
 
+.c1 .sinoui-switch__ripple-layout {
+  left: 0;
+  top: 0;
+  width: 38px;
+  height: 38px;
+}
+
 .c0 {
   width: 58px;
   height: 38px;
@@ -180,6 +187,13 @@ exports[`Switch 镜像测试 渲染Switch 1`] = `
 }
 
 .c1 .sinoui-switch__ripple {
+  width: 38px;
+  height: 38px;
+}
+
+.c1 .sinoui-switch__ripple-layout {
+  left: 0;
+  top: 0;
   width: 38px;
   height: 38px;
 }
@@ -297,6 +311,13 @@ exports[`Switch 镜像测试 选中状态 1`] = `
 }
 
 .c1 .sinoui-switch__ripple {
+  width: 38px;
+  height: 38px;
+}
+
+.c1 .sinoui-switch__ripple-layout {
+  left: 0;
+  top: 0;
   width: 38px;
   height: 38px;
 }

@@ -5,13 +5,10 @@ export default function SwitchDemo() {
   const [checked, setChecked] = useState<{ [name: string]: boolean }>({
     switch3: true,
   });
-  const handleChange = useCallback(
-    (event, name) => {
-      const newChecked = { ...checked, [name]: event.target.checked };
-      setChecked(newChecked);
-    },
-    [checked],
-  );
+  const handleChange = useCallback((event, name) => {
+    const value = event.target.checked;
+    setChecked((state) => ({ ...state, [name]: value }));
+  }, []);
   return (
     <>
       <Switch
