@@ -1,11 +1,20 @@
 {
   "name": "@sinoui/switch",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "开关切换组件",
   "license": "MIT",
   "main": "dist/index.js",
   "umd:main": "dist/switch.umd.production.js",
   "module": "dist/switch.esm.js",
   "typings": "dist/index.d.ts",
+  "homepage": "https://sinoui.github.io/switch",
+  "bugs": {
+    "url": "https://github.com/sinoui/switch/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinoui/switch.git"
+  },
   "scripts": {
     "start": "ts-lib-tools watch",
     "test": "ts-lib-tools test",
