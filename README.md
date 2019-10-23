@@ -1,10 +1,39 @@
 # @sinoui/switch
 
-这是由[ts-lib-scripts](https://github.com/sinoui/ts-lib-scripts)创建的 TypeScript 库项目。
+[![npm version](https://img.shields.io/npm/v/@sinoui/switch)](https://www.npmjs.com/package/@sinoui/switch)
+[![downloads](https://img.shields.io/npm/dm/@sinoui/switch)](https://www.npmjs.com/package/@sinoui/switch)
+
+开关切换组件。UI 遵循 [Material Design 设计规范](https://www.material.io/components/selection-controls/#switches)。
+
+[官方文档](https://sinoui.github.io/switch)
+
+## 依赖安装
+
+```shell
+yarn add @sinoui/switch
+```
+
+## 简单示例
+
+```tsx
+import Switch from '@sinoui/switch';
+
+function Demo() {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = useCallback((event) => {
+    setChecked(event.target.checked);
+  }, []);
+
+  return <Switch checked={checked} value="switch1" onChange={handleChange} />;
+}
+```
+
+更多示例请参考[官方文档](https://sinoui.github.io/switch)。
 
 ## 本地开发
 
-项目中有以下有用的命令。
+项目中有以下可用的命令。
 
 ### `yarn start`
 
@@ -37,22 +66,6 @@ yarn doc:dev
 ```
 
 ### 编译并打包文档
-
-```shell
-yarn doc:publish
-```
-
-### 发布文档
-
-在发布文档之前，在`package.json`中配置好`homepage`，如下所示：
-
-```json
-{
-  "homepage": "https://sinouiincubator.github.io/editable-data-table"
-}
-```
-
-配置完之后就可以执行下面的命令行发布文档：
 
 ```shell
 yarn doc:publish
