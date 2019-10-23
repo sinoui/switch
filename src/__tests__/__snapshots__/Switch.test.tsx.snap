@@ -105,11 +105,15 @@ exports[`Switch 镜像测试 不可用状态 1`] = `
 >
   <span
     className="c1 sinoui-switch__label"
+    data-testid="switchLabel"
     disabled={true}
   >
     <input
       className="sinoui-switch__input"
       disabled={true}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       type="checkbox"
       value="switch2"
     />
@@ -222,9 +226,13 @@ exports[`Switch 镜像测试 渲染Switch 1`] = `
 >
   <span
     className="c1 sinoui-switch__label"
+    data-testid="switchLabel"
   >
     <input
       className="sinoui-switch__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       type="checkbox"
       value="switch1"
     />
@@ -348,10 +356,14 @@ exports[`Switch 镜像测试 选中状态 1`] = `
     checked={true}
     className="c1 sinoui-switch__label"
     color="accent"
+    data-testid="switchLabel"
   >
     <input
       checked={true}
       className="sinoui-switch__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       type="checkbox"
       value="switch3"
     />

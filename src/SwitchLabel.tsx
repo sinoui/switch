@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import classNames from 'classnames';
 import { useRipple } from '@sinoui/ripple';
@@ -28,6 +28,7 @@ interface WrapperProps {
   checked?: boolean;
   disabled?: boolean;
   color?: string;
+  focused?: boolean;
   theme: Theme;
 }
 
@@ -74,6 +75,17 @@ const disabledWrapperStyle = css<WrapperProps>`
   }
 `;
 
+const focusedWrapperStyle = css<WrapperProps>`
+  background-color: ${(props) =>
+    props.checked
+      ? getHoverBgColor({
+          color: props.color || 'primary',
+          theme: props.theme,
+          disabled: props.disabled,
+        })
+      : 'rgba(0, 0, 0, 0.08)'};
+`;
+
 const SwitchLabelWrapper = styled.span<WrapperProps>`
   display: flex;
   align-items: inherit;
@@ -95,6 +107,7 @@ const SwitchLabelWrapper = styled.span<WrapperProps>`
     background-color: rgba(0, 0, 0, 0.08);
   }
 
+  ${(props) => props.focused && focusedWrapperStyle};
   ${(props) => props.checked && checkedWrapperStyle};
   ${(props) => props.disabled && disabledWrapperStyle};
 
@@ -153,6 +166,22 @@ export default function SwitchLabel(props: Props) {
     inputRef,
   } = props;
 
+  const [focused, setFocused] = useState(false);
+
+  const onFocus = useCallback(() => setFocused(true), []);
+
+  const onBlur = useCallback(() => setFocused(false), []);
+
+  const handleOnChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange(event);
+      }
+      onBlur();
+    },
+    [onBlur, onChange],
+  );
+
   const rippleRef = useRipple<HTMLSpanElement>({
     center: true,
     fixSize: true,
@@ -167,16 +196,22 @@ export default function SwitchLabel(props: Props) {
       checked={checked}
       disabled={disabled}
       color={color}
-      className="sinoui-switch__label"
+      className={classNames('sinoui-switch__label', {
+        'sinoui-switch--focused': focused,
+      })}
+      focused={focused}
+      data-testid="switchLabel"
     >
       <input
         type="checkbox"
         name={name}
         checked={checked}
-        onChange={onChange}
+        onChange={handleOnChange}
         disabled={disabled}
         value={value}
         ref={inputRef}
+        onFocus={onFocus}
+        onBlur={onBlur}
         {...inputProps}
         className={classNames('sinoui-switch__input', inputClassName)}
       />
