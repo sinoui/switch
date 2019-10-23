@@ -113,10 +113,62 @@ export default function SwitchDemo() {
   <Switch disabled checked value="switch2" />
 </Playground>
 
+## 与@sinoui/sinoui-components-forms 集成
+
+[@sinoui/sinoui-components-forms](https://sinoui.github.io/sinoui-forms-library/sinoui-components-forms)是以`sinoui-components`为基础的表单控件库。
+`Switch`与`@sinoui/sinoui-components-forms`的集成方式如下：
+
+首先定义`SwitchField`组件：
+
+```tsx
+import React, { useCallback } from 'react';
+import { useFieldValue } from '@sinoui/rx-form-state';
+import { Field } from '@sinoui/sinoui-components-forms';
+import Switch from '@sinoui/switch';
+
+export default function SwitchField(props) {
+  const { name, value, unCheckedValue } = props;
+  const fieldValue = useFieldValue(name);
+
+  const valueExtract = useCallback(
+    (event) => {
+      const { checked } = event.target;
+      return checked ? value : unCheckedValue;
+    },
+    [value, unCheckedValue],
+  );
+  return (
+    <Field
+      as={Switch}
+      checked={fieldValue === value}
+      valueExtract={valueExtract}
+      defaultValue=""
+      {...props}
+    />
+  );
+}
+```
+
+```tsx
+import React from 'react';
+import { Form, FormItem, Label } from '@sinoui/sinoui-components-forms';
+import SwitchField from './SwitchField';
+
+function Demo() {
+  return (
+    <Form>
+      <FormItem>
+        <Label>显示农历</Label>
+        <SwitchField name="showLunar" />
+      </FormItem>
+    </Form>
+  );
+}
+```
+
 ## 自定义样式
 
 `Switch`组件的样式规范是参照[material designe | Switches](https://material.io/components/selection-controls/#switches)实现。
-
 `DOM结构`
 
 ```html
@@ -125,13 +177,11 @@ export default function SwitchDemo() {
     <input class="sinoui-switch__input" />
     <span class="sinoui-switch__thumb" />
   </span>
-
   <span class="sinoui-switch__track" />
 </span>
 ```
 
 如果我们需要自定义样式，不如改变圆点的尺寸，可以使用定义 css 文件指定其对应颜色，然后将 css 文件引入到使用 Switch 组件的文件中即可：
-
 `Switch.css`
 
 ```css
