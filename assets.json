@@ -1,10 +1,10 @@
 {
   "vendors.js": "/switch/static/js/vendors.d6e076d6.js",
-  "vendors.js.map": "/switch/static/js/vendors.3f2ed7c191deb60aa2d2.js.map",
-  "app.js": "/switch/static/js/app.3f2ed7c191deb60aa2d2.js",
-  "app.js.map": "/switch/static/js/app.3f2ed7c191deb60aa2d2.js.map",
-  "docs-index.js": "/switch/static/js/docs-index.0a1de342.js",
-  "docs-index.js.map": "/switch/static/js/docs-index.3f2ed7c191deb60aa2d2.js.map",
+  "vendors.js.map": "/switch/static/js/vendors.b6a0f994786ed0721812.js.map",
+  "app.js": "/switch/static/js/app.b6a0f994786ed0721812.js",
+  "app.js.map": "/switch/static/js/app.b6a0f994786ed0721812.js.map",
+  "docs-index.js": "/switch/static/js/docs-index.29dffb63.js",
+  "docs-index.js.map": "/switch/static/js/docs-index.b6a0f994786ed0721812.js.map",
   "404.html": "/switch/404.html",
   "index.html": "/switch/index.html"
 }
