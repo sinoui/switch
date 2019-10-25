@@ -24,6 +24,7 @@ const Wrapper = styled.span<{ disabled?: boolean }>`
   flex-shrink: 0;
   vertical-align: middle;
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+  -webkit-tap-highlight-color: transparent;
 `;
 
 /**
