@@ -102,6 +102,7 @@ const SwitchLabelWrapper = styled.span<WrapperProps>`
     })};
   padding: 9px;
   border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
